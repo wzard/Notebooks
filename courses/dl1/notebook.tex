@@ -1,0 +1,1388 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{lesson1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Image classification with Convolutional Neural
+Networks}\label{image-classification-with-convolutional-neural-networks}
+
+    Welcome to the first week of the second deep learning certificate! We're
+going to use convolutional neural networks (CNNs) to allow our computer
+to see - something that is only possible thanks to deep learning.
+
+    \subsection{Introduction to our first task: 'Dogs vs
+Cats'}\label{introduction-to-our-first-task-dogs-vs-cats}
+
+    We're going to try to create a model to enter the Dogs vs Cats
+competition at Kaggle. There are 25,000 labelled dog and cat photos
+available for training, and 12,500 in the test set that we have to try
+to label for this competition. According to the Kaggle web-site, when
+this competition was launched (end of 2013): "State of the art: The
+current literature suggests machine classifiers can score above 80\%
+accuracy on this task". So if we can beat 80\%, then we will be at the
+cutting edge as of 2013!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Put these at the top of every notebook, to get automatic reloading and inline plotting}
+        \PY{o}{\PYZpc{}}\PY{k}{reload\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    Here we import the libraries we need. We'll learn about what each does
+during the course.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} This file contains all the main external libs we\PYZsq{}ll use}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{imports} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{transforms} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{conv\PYZus{}learner} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{model} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{dataset} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{sgdr} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{plots} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \texttt{PATH} is the path to your data - if you use the recommended
+setup approaches from the lesson, you won't need to change this.
+\texttt{sz} is the size that the images will be resized to in order to
+ensure that the training runs quickly. We'll be talking about this
+parameter a lot during the course. Leave it at \texttt{224} for now.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{PATH} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/dogscats/}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{sz}\PY{o}{=}\PY{l+m+mi}{224}
+\end{Verbatim}
+
+
+    It's important that you have a working NVidia GPU set up. The
+programming framework used to behind the scenes to work with NVidia GPUs
+is called CUDA. Therefore, you need to ensure the following line returns
+\texttt{True} before you proceed. If you have problems with this, please
+check the FAQ and ask for help on \href{http://forums.fast.ai}{the
+forums}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{is\PYZus{}available}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} True
+\end{Verbatim}
+            
+    In addition, NVidia provides special accelerated functions for deep
+learning in a package called CuDNN. Although not strictly necessary, it
+will improve training performance significantly, and is included by
+default in all supported fastai configurations. Therefore, if the
+following does not return \texttt{True}, you may want to look into why.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{torch}\PY{o}{.}\PY{n}{backends}\PY{o}{.}\PY{n}{cudnn}\PY{o}{.}\PY{n}{enabled}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} True
+\end{Verbatim}
+            
+    \subsubsection{Extra steps if NOT using Crestle or Paperspace or our
+scripts}\label{extra-steps-if-not-using-crestle-or-paperspace-or-our-scripts}
+
+    The dataset is available at http://files.fast.ai/data/dogscats.zip. You
+can download it directly on your server by running the following line in
+your terminal. \texttt{wget\ http://files.fast.ai/data/dogscats.zip}.
+You should put the data in a subdirectory of this notebook's directory,
+called \texttt{data/}. Note that this data is already available in
+Crestle and the Paperspace fast.ai template.
+
+    \subsubsection{Extra steps if using
+Crestle}\label{extra-steps-if-using-crestle}
+
+    Crestle has the datasets required for fast.ai in /datasets, so we'll
+create symlinks to the data we want for this competition. (NB: we can't
+write to /datasets, but we need a place to store temporary files, so we
+create our own writable directory to put the symlinks in, and we also
+take advantage of Crestle's \texttt{/cache/} faster temporary storage
+space.)
+
+To run these commands (\textbf{which you should only do if using
+Crestle}) remove the \texttt{\#} characters from the start of each line.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} os.makedirs(\PYZsq{}data/dogscats/models\PYZsq{}, exist\PYZus{}ok=True)}
+        
+        \PY{c+c1}{\PYZsh{} !ln \PYZhy{}s /datasets/fast.ai/dogscats/train \PYZob{}PATH\PYZcb{}}
+        \PY{c+c1}{\PYZsh{} !ln \PYZhy{}s /datasets/fast.ai/dogscats/test \PYZob{}PATH\PYZcb{}}
+        \PY{c+c1}{\PYZsh{} !ln \PYZhy{}s /datasets/fast.ai/dogscats/valid \PYZob{}PATH\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} os.makedirs(\PYZsq{}/cache/tmp\PYZsq{}, exist\PYZus{}ok=True)}
+        \PY{c+c1}{\PYZsh{} !ln \PYZhy{}fs /cache/tmp \PYZob{}PATH\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} os.makedirs(\PYZsq{}/cache/tmp\PYZsq{}, exist\PYZus{}ok=True)}
+        \PY{c+c1}{\PYZsh{} !ln \PYZhy{}fs /cache/tmp \PYZob{}PATH\PYZcb{}}
+\end{Verbatim}
+
+
+    \subsection{First look at cat
+pictures}\label{first-look-at-cat-pictures}
+
+    Our library will assume that you have \emph{train} and \emph{valid}
+directories. It also assumes that each dir will have subdirs for each
+class you wish to recognize (in this case, 'cats' and 'dogs').
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{PATH}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} ['models', 'sample', 'test1', 'train', 'valid']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} ['cats', 'dogs']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{files} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{valid/cats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+        \PY{n}{files}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} ['cat.1001.jpg',
+         'cat.10016.jpg',
+         'cat.10026.jpg',
+         'cat.10048.jpg',
+         'cat.10050.jpg']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{img} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{valid/cats/}\PY{l+s+si}{\PYZob{}files[0]\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Here is how the raw data looks like
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{img}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} (499, 336, 3)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{img}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} array([[[60, 58, 10],
+                 [60, 57, 14],
+                 [61, 56, 18],
+                 [63, 54, 23]],
+         
+                [[56, 54,  6],
+                 [56, 53, 10],
+                 [57, 52, 14],
+                 [60, 51, 20]],
+         
+                [[52, 49,  4],
+                 [52, 49,  6],
+                 [53, 48, 10],
+                 [56, 47, 16]],
+         
+                [[50, 47,  2],
+                 [50, 47,  4],
+                 [51, 45,  9],
+                 [53, 44, 13]]], dtype=uint8)
+\end{Verbatim}
+            
+    \subsection{Our first model: quick
+start}\label{our-first-model-quick-start}
+
+    We're going to use a pre-trained model, that is, a model created by some
+one else to solve a different problem. Instead of building a model from
+scratch to solve a similar problem, we'll use a model trained on
+ImageNet (1.2 million images and 1000 classes) as a starting point. The
+model is a Convolutional Neural Network (CNN), a type of Neural Network
+that builds state-of-the-art models for computer vision. We'll be
+learning all about CNNs during this course.
+
+We will be using the resnet34 model. resnet34 is a version of the model
+that won the 2015 ImageNet competition. Here is more info on
+\href{https://github.com/KaimingHe/deep-residual-networks}{resnet
+models}. We'll be studying them in depth later, but for now we'll focus
+on using them effectively.
+
+Here's how to train and evalulate a \emph{dogs vs cats} model in 3 lines
+of code, and under 20 seconds:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Uncomment the below if you need to reset your precomputed activations}
+        \PY{c+c1}{\PYZsh{} shutil.rmtree(f\PYZsq{}\PYZob{}PATH\PYZcb{}tmp\PYZsq{}, ignore\PYZus{}errors=True)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{arch}\PY{o}{=}\PY{n}{resnet34}
+        \PY{n}{data} \PY{o}{=} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}paths}\PY{p}{(}\PY{n}{PATH}\PY{p}{,} \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{sz}\PY{p}{)}\PY{p}{)}
+        \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=2), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                                                                              
+    0      0.042222   0.028351   0.991211  
+    1      0.035367   0.026421   0.991211                                                                              
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} [0.026420766, 0.9912109375]
+\end{Verbatim}
+            
+    How good is this model? Well, as we mentioned, prior to this
+competition, the state of the art was 80\% accuracy. But the competition
+resulted in a huge jump to 98.9\% accuracy, with the author of a popular
+deep learning library winning the competition. Extraordinarily, less
+than 4 years later, we can now beat that result in seconds! Even last
+year in this same course, our initial model had 98.3\% accuracy, which
+is nearly double the error we're getting just a year later, and that
+took around 10 minutes to compute.
+
+    \subsection{Analyzing results: looking at
+pictures}\label{analyzing-results-looking-at-pictures}
+
+    As well as looking at the overall metrics, it's also a good idea to look
+at examples of each of: 1. A few correct labels at random 2. A few
+incorrect labels at random 3. The most correct labels of each class (ie
+those with highest probability that are correct) 4. The most incorrect
+labels of each class (ie those with highest probability that are
+incorrect) 5. The most uncertain labels (ie those with probability
+closest to 0.5).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} This is the label for a val data}
+         \PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}y}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} array([0, 0, 0, {\ldots}, 1, 1, 1])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} from here we know that \PYZsq{}cats\PYZsq{} is label 0 and \PYZsq{}dogs\PYZsq{} is label 1.}
+         \PY{n}{data}\PY{o}{.}\PY{n}{classes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} ['cats', 'dogs']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} this gives prediction for validation set. Predictions are in log scale}
+         \PY{n}{log\PYZus{}preds} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{log\PYZus{}preds}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (2000, 2)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{log\PYZus{}preds}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} array([[ -0.00002, -11.07446],
+                [ -0.00138,  -6.58385],
+                [ -0.00083,  -7.09025],
+                [ -0.00029,  -8.13645],
+                [ -0.00035,  -7.9663 ],
+                [ -0.00029,  -8.15125],
+                [ -0.00002, -10.82139],
+                [ -0.00003, -10.33846],
+                [ -0.00323,  -5.73731],
+                [ -0.0001 ,  -9.21326]], dtype=float32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{log\PYZus{}preds}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} from log probabilities to 0 or 1}
+         \PY{n}{probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}preds}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}        \PY{c+c1}{\PYZsh{} pr(dog)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{rand\PYZus{}by\PYZus{}mask}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{rand\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{n}{is\PYZus{}correct}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{rand\PYZus{}by\PYZus{}mask}\PY{p}{(}\PY{p}{(}\PY{n}{preds} \PY{o}{==} \PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}y}\PY{p}{)}\PY{o}{==}\PY{n}{is\PYZus{}correct}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{idxs}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{n}{imgs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}ds}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{idxs}\PY{p}{]}\PY{p}{)}
+             \PY{n}{title\PYZus{}probs} \PY{o}{=} \PY{p}{[}\PY{n}{probs}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{idxs}\PY{p}{]}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{k}{return} \PY{n}{plots}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}ds}\PY{o}{.}\PY{n}{denorm}\PY{p}{(}\PY{n}{imgs}\PY{p}{)}\PY{p}{,} \PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{titles}\PY{o}{=}\PY{n}{title\PYZus{}probs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{plots}\PY{p}{(}\PY{n}{ims}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{titles}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{n}{f} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{n}{figsize}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ims}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{sp} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ims}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{n}{rows}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{sp}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{titles} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:} \PY{n}{sp}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{titles}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{ims}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{load\PYZus{}img\PYZus{}id}\PY{p}{(}\PY{n}{ds}\PY{p}{,} \PY{n}{idx}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{PIL}\PY{o}{.}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{PATH}\PY{o}{+}\PY{n}{ds}\PY{o}{.}\PY{n}{fnames}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{idxs}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{n}{imgs} \PY{o}{=} \PY{p}{[}\PY{n}{load\PYZus{}img\PYZus{}id}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}ds}\PY{p}{,}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{idxs}\PY{p}{]}
+             \PY{n}{title\PYZus{}probs} \PY{o}{=} \PY{p}{[}\PY{n}{probs}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{idxs}\PY{p}{]}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{k}{return} \PY{n}{plots}\PY{p}{(}\PY{n}{imgs}\PY{p}{,} \PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{titles}\PY{o}{=}\PY{n}{title\PYZus{}probs}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} 1. A few correct labels at random}
+         \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{rand\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correctly classified}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Correctly classified
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} 2. A few incorrect labels at random}
+         \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{rand\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Incorrectly classified}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Incorrectly classified
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{most\PYZus{}by\PYZus{}mask}\PY{p}{(}\PY{n}{mask}\PY{p}{,} \PY{n}{mult}\PY{p}{)}\PY{p}{:}
+             \PY{n}{idxs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{return} \PY{n}{idxs}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{mult} \PY{o}{*} \PY{n}{probs}\PY{p}{[}\PY{n}{idxs}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{is\PYZus{}correct}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{mult} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{if} \PY{p}{(}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{==}\PY{n}{is\PYZus{}correct} \PY{k}{else} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{most\PYZus{}by\PYZus{}mask}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{preds} \PY{o}{==} \PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}y}\PY{p}{)}\PY{o}{==}\PY{n}{is\PYZus{}correct}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{val\PYZus{}y} \PY{o}{==} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{mult}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most correct cats}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most correct cats
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most correct dogs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most correct dogs
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most incorrect cats}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most incorrect cats
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most incorrect dogs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most incorrect dogs
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{most\PYZus{}uncertain} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{probs} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+         \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}uncertain}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most uncertain predictions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most uncertain predictions
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Choosing a learning rate}\label{choosing-a-learning-rate}
+
+    The \emph{learning rate} determines how quickly or how slowly you want
+to update the \emph{weights} (or \emph{parameters}). Learning rate is
+one of the most difficult parameters to set, because it significantly
+affect model performance.
+
+The method \texttt{learn.lr\_find()} helps you find an optimal learning
+rate. It uses the technique developed in the 2015 paper
+\href{http://arxiv.org/abs/1506.01186}{Cyclical Learning Rates for
+Training Neural Networks}, where we simply keep increasing the learning
+rate from a very small value, until the loss starts decreasing. We can
+plot the learning rate across batches to see what this looks like.
+
+We first create a new learner, since we want to know how to set the
+learning rate for a new (untrained) model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 84\%|████████▍ | 304/360 [00:04<00:00, 61.13it/s, loss=0.442]
+                                                             
+    \end{Verbatim}
+
+    Our \texttt{learn} object contains an attribute \texttt{sched} that
+contains our learning rate scheduler, and has some convenient plotting
+functionality including this one:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}lr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note that in the previous plot \emph{iteration} is one iteration (or
+\emph{minibatch}) of SGD. In one epoch there are
+(num\_train\_samples/num\_iterations) of SGD.
+
+We can see the plot of loss versus learning rate to see where our loss
+stops decreasing:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The loss is still clearly improving at lr=1e-2 (0.01), so that's what we
+use. Note that the optimal learning rate can change as we training the
+model, so you may want to re-run this function from time to time.
+
+    \subsection{Improving our model}\label{improving-our-model}
+
+    \subsubsection{Data augmentation}\label{data-augmentation}
+
+    If you try training for more epochs, you'll notice that we start to
+\emph{overfit}, which means that our model is learning to recognize the
+specific images in the training set, rather than generalizaing such that
+we also get good results on the validation set. One way to fix this is
+to effectively create more data, through \emph{data augmentation}. This
+refers to randomly changing the images in ways that shouldn't impact
+their interpretation, such as horizontal flipping, zooming, and
+rotating.
+
+We can do this by passing \texttt{aug\_tfms} (\emph{augmentation
+transforms}) to \texttt{tfms\_from\_model}, with a list of functions to
+apply that randomly change the image however we wish. For photos that
+are largely taken from the side (e.g. most photos of dogs and cats, as
+opposed to photos taken from the top down, such as satellite imagery) we
+can use the pre-defined list of functions \texttt{transforms\_side\_on}.
+We can also specify random zooming of images up to specified scale by
+adding the \texttt{max\_zoom} parameter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{tfms} \PY{o}{=} \PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{resnet34}\PY{p}{,} \PY{n}{sz}\PY{p}{,} \PY{n}{aug\PYZus{}tfms}\PY{o}{=}\PY{n}{transforms\PYZus{}side\PYZus{}on}\PY{p}{,} \PY{n}{max\PYZus{}zoom}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}augs}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data} \PY{o}{=} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}paths}\PY{p}{(}\PY{n}{PATH}\PY{p}{,} \PY{n}{bs}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{x}\PY{p}{,}\PY{n}{\PYZus{}} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{aug\PYZus{}dl}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{data}\PY{o}{.}\PY{n}{trn\PYZus{}ds}\PY{o}{.}\PY{n}{denorm}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{ims} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{[}\PY{n}{get\PYZus{}augs}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plots}\PY{p}{(}\PY{n}{ims}\PY{p}{,} \PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let's create a new \texttt{data} object that includes this augmentation
+in the transforms.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{data} \PY{o}{=} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}paths}\PY{p}{(}\PY{n}{PATH}\PY{p}{,} \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{)}
+         \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.       0.0462   0.02459  0.99121]                         
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{precompute}\PY{o}{=}\PY{k+kc}{False}
+\end{Verbatim}
+
+
+    By default when we create a learner, it sets all but the last layer to
+\emph{frozen}. That means that it's still only updating the weights in
+the last layer when we call \texttt{fit}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=3), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.       0.05     0.02535  0.9917 ]                         
+[ 1.       0.04248  0.02372  0.99219]                         
+[ 2.       0.04918  0.02365  0.9917 ]                         
+
+
+    \end{Verbatim}
+
+    What is that \texttt{cycle\_len} parameter? What we've done here is used
+a technique called \emph{stochastic gradient descent with restarts
+(SGDR)}, a variant of \emph{learning rate annealing}, which gradually
+decreases the learning rate as training progresses. This is helpful
+because as we get closer to the optimal weights, we want to take smaller
+steps.
+
+However, we may find ourselves in a part of the weight space that isn't
+very resilient - that is, small changes to the weights may result in big
+changes to the loss. We want to encourage our model to find parts of the
+weight space that are both accurate and stable. Therefore, from time to
+time we increase the learning rate (this is the 'restarts' in 'SGDR'),
+which will force the model to jump to a different part of the weight
+space if the current area is "spikey". Here's a picture of how that
+might look if we reset the learning rates 3 times (in this paper they
+call it a "cyclic LR schedule"):
+
+ (From the paper \href{https://arxiv.org/abs/1704.00109}{Snapshot
+Ensembles}).
+
+The number of epochs between resetting the learning rate is set by
+\texttt{cycle\_len}, and the number of times this happens is refered to
+as the \emph{number of cycles}, and is what we're actually passing as
+the 2nd parameter to \texttt{fit()}. So here's what our actual learning
+rates looked like:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}lr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Our validation loss isn't improving much, so there's probably no point
+further training the last layer on its own.
+
+    Since we've got a pretty good model at this point, we might want to save
+it so we can load it again later without training it from scratch.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{224\PYZus{}lastlayer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{224\PYZus{}lastlayer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Fine-tuning and differential learning rate
+annealing}\label{fine-tuning-and-differential-learning-rate-annealing}
+
+    Now that we have a good final layer trained, we can try fine-tuning the
+other layers. To tell the learner that we want to unfreeze the remaining
+layers, just call (surprise surprise!) \texttt{unfreeze()}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Note that the other layers have \emph{already} been trained to recognize
+imagenet photos (whereas our final layers where randomly initialized),
+so we want to be careful of not destroying the carefully tuned weights
+that are already there.
+
+Generally speaking, the earlier layers (as we've seen) have more
+general-purpose features. Therefore we would expect them to need less
+fine-tuning for new datasets. For this reason we will use different
+learning rates for different layers: the first few layers will be at
+1e-4, the middle layers at 1e-3, and our FC layers we'll leave at 1e-2
+as before. We refer to this as \emph{differential learning rates},
+although there's no standard name for this techique in the literature
+that we're aware of.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{lr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{,}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.       0.04678  0.02127  0.99219]                         
+[ 1.       0.04127  0.01774  0.9917 ]                         
+[ 2.       0.03652  0.01744  0.99219]                         
+[ 3.      0.0297  0.0206  0.9917]                             
+[ 4.       0.0233   0.01944  0.99219]                         
+[ 5.       0.01743  0.01844  0.99316]                         
+[ 6.       0.02344  0.01892  0.9917 ]                         
+
+
+    \end{Verbatim}
+
+    Another trick we've used here is adding the \texttt{cycle\_mult}
+parameter. Take a look at the following chart, and see if you can figure
+out what the parameter is doing:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}lr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_88_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note that's what being plotted above is the learning rate of the
+\emph{final layers}. The learning rates of the earlier layers are fixed
+at the same multiples of the final layer rates as we initially requested
+(i.e. the first layers have 100x smaller, and middle layers 10x smaller
+learning rates, since we set \texttt{lr=np.array({[}1e-4,1e-3,1e-2{]})}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{224\PYZus{}all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{224\PYZus{}all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    There is something else we can do with data augmentation: use it at
+\emph{inference} time (also known as \emph{test} time). Not
+surprisingly, this is known as \emph{test time augmentation}, or just
+\emph{TTA}.
+
+TTA simply makes predictions not just on the images in your validation
+set, but also makes predictions on a number of randomly augmented
+versions of them too (by default, it uses the original image along with
+4 randomly augmented versions). It then takes the average prediction
+from these images, and uses that. To use TTA on the validation set, we
+can use the learner's \texttt{TTA()} method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{log\PYZus{}preds}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{TTA}\PY{p}{(}\PY{p}{)}
+         \PY{n}{probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}preds}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                                             
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{accuracy\PYZus{}np}\PY{p}{(}\PY{n}{probs}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 0.991
+\end{Verbatim}
+            
+    I generally see about a 10-20\% reduction in error on this dataset when
+using TTA at this point, which is an amazing result for such a quick and
+easy technique!
+
+    \subsection{Analyzing results}\label{analyzing-results}
+
+    \subsubsection{Confusion matrix}\label{confusion-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{probs}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{probs} \PY{o}{=} \PY{n}{probs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    A common way to analyze the result of a classification model is to use a
+\href{http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/}{confusion
+matrix}. Scikit-learn has a convenient function we can use for this
+purpose:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{preds}\PY{p}{)}
+\end{Verbatim}
+
+
+    We can just print out the confusion matrix, or we can show a graphical
+view (which is mainly useful for dependents with a larger number of
+categories).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[996   4]
+ [  8 992]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_102_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Looking at pictures
+again}\label{looking-at-pictures-again}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most incorrect cats}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most incorrect cats
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_104_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{plot\PYZus{}val\PYZus{}with\PYZus{}title}\PY{p}{(}\PY{n}{most\PYZus{}by\PYZus{}correct}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most incorrect dogs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Most incorrect dogs
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_105_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Review: easy steps to train a world-class image
+classifier}\label{review-easy-steps-to-train-a-world-class-image-classifier}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Enable data augmentation, and precompute=True
+\item
+  Use \texttt{lr\_find()} to find highest learning rate where loss is
+  still clearly improving
+\item
+  Train last layer from precomputed activations for 1-2 epochs
+\item
+  Train last layer with data augmentation (i.e. precompute=False) for
+  2-3 epochs with cycle\_len=1
+\item
+  Unfreeze all layers
+\item
+  Set earlier layers to 3x-10x lower learning rate than next higher
+  layer
+\item
+  Use \texttt{lr\_find()} again
+\item
+  Train full network with cycle\_mult=2 until over-fitting
+\end{enumerate}
+
+    \subsection{Understanding the code for our first
+model}\label{understanding-the-code-for-our-first-model}
+
+    Let's look at the Dogs v Cats code line by line.
+
+\textbf{tfms} stands for \emph{transformations}.
+\texttt{tfms\_from\_model} takes care of resizing, image cropping,
+initial normalization (creating data with (mean,stdev) of (0,1)), and
+more.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{tfms} \PY{o}{=} \PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{resnet34}\PY{p}{,} \PY{n}{sz}\PY{p}{)}
+\end{Verbatim}
+
+
+    We need a path that points to the dataset. In this path we will also
+store temporary data and final results.
+\texttt{ImageClassifierData.from\_paths} reads data from a provided path
+and creates a dataset ready for training.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{data} \PY{o}{=} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}paths}\PY{p}{(}\PY{n}{PATH}\PY{p}{,} \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{ConvLearner.pretrained} builds \emph{learner} that contains a
+pre-trained model. The last layer of the model needs to be replaced with
+the layer of the right dimensions. The pretained model was trained for
+1000 classes therfore the final layer predicts a vector of 1000
+probabilities. The model for cats and dogs needs to output a two
+dimensional vector. The diagram below shows in an example how this was
+done in one of the earliest successful CNNs. The layer "FC8" here would
+get replaced with a new layer with 2 outputs.
+
+
+\href{https://image.slidesharecdn.com/practicaldeeplearning-160329181459/95/practical-deep-learning-16-638.jpg}{original
+image}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{resnet34}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \emph{Parameters} are learned by fitting a model to the data.
+\emph{Hyparameters} are another kind of parameter, that cannot be
+directly learned from the regular training process. These parameters
+express ``higher-level'' properties of the model such as its complexity
+or how fast it should learn. Two examples of hyperparameters are the
+\emph{learning rate} and the \emph{number of epochs}.
+
+During iterative training of a neural network, a \emph{batch} or
+\emph{mini-batch} is a subset of training samples used in one iteration
+of Stochastic Gradient Descent (SGD). An \emph{epoch} is a single pass
+through the entire training set which consists of multiple iterations of
+SGD.
+
+We can now \emph{fit} the model; that is, use \emph{gradient descent} to
+find the best parameters for the fully connected layer we added, that
+can separate cat pictures from dog pictures. We need to pass two
+hyperameters: the \emph{learning rate} (generally 1e-2 or 1e-3 is a good
+starting point, we'll look more at this next) and the \emph{number of
+epochs} (you can pass in a higher number and just stop training when you
+see it's no longer improving, then re-run it with the number of epochs
+you found works well.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+A Jupyter Widget
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.       0.04153  0.02681  0.98877]                          
+
+
+    \end{Verbatim}
+
+    \subsection{Analyzing results: loss and
+accuracy}\label{analyzing-results-loss-and-accuracy}
+
+    When we run \texttt{learn.fit} we print 3 performance values (see
+above.) Here 0.03 is the value of the \textbf{loss} in the training set,
+0.0226 is the value of the loss in the validation set and 0.9927 is the
+validation accuracy. What is the loss? What is accuracy? Why not to just
+show accuracy?
+
+\textbf{Accuracy} is the ratio of correct prediction to the total number
+of predictions.
+
+In machine learning the \textbf{loss} function or cost function is
+representing the price paid for inaccuracy of predictions.
+
+The loss associated with one example in binary classification is given
+by: \texttt{-(y\ *\ log(p)\ +\ (1-y)\ *\ log\ (1-p))} where \texttt{y}
+is the true label of \texttt{x} and \texttt{p} is the probability
+predicted by our model that the label is 1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{binary\PYZus{}loss}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{y} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{p}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{acts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)}
+         \PY{n}{binary\PYZus{}loss}\PY{p}{(}\PY{n}{acts}\PY{p}{,} \PY{n}{preds}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} 0.164252033486018
+\end{Verbatim}
+            
+    Note that in our toy example above our accuracy is 100\% and our loss is
+0.16. Compare that to a loss of 0.03 that we are getting while
+predicting cats and dogs. Exercise: play with \texttt{preds} to get a
+lower loss for this example.
+
+\textbf{Example:} Here is an example on how to compute the loss for one
+example of binary classification problem. Suppose for an image x with
+label 1 and your model gives it a prediction of 0.9. For this case the
+loss should be small because our model is predicting a label \(1\) with
+high probability.
+
+\texttt{loss\ =\ -log(0.9)\ =\ 0.10}
+
+Now suppose x has label 0 but our model is predicting 0.9. In this case
+our loss should be much larger.
+
+loss = -log(1-0.9) = 2.30
+
+\begin{itemize}
+\tightlist
+\item
+  Exercise: look at the other cases and convince yourself that this make
+  sense.
+\item
+  Exercise: how would you rewrite \texttt{binary\_loss} using
+  \texttt{if} instead of \texttt{*} and \texttt{+}?
+\end{itemize}
+
+Why not just maximize accuracy? The binary classification loss is an
+easier function to optimize.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
